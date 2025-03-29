@@ -17,18 +17,14 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-%x&kg-nx75kirv^12#m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-# Разрешенные хосты
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'vh438.timeweb.ru',
-    'boodaikg.com',
-    'vasyaproger-backend1-c0b9.twc1.net',
-    '0.0.0.0',  # Для Docker
-]
-
-# Порт сервера (используется для запуска через runserver или gunicorn)
-PORT = int(os.getenv('PORT', 8000))
+# Allowed hosts - flexible for different environments
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
+if not DEBUG:
+    ALLOWED_HOSTS.extend([
+        'vh438.timeweb.ru',
+        'boodaikg.com',
+        'vasyaproger-backend1-c0b9.twc1.net',
+    ])
 
 # Application definition
 INSTALLED_APPS = [
@@ -49,7 +45,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Должно быть выше CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',  # Must be above CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -57,17 +53,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS настройки
+# CORS settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://localhost:3000",
-    "http://localhost:5173",  # Для локального Vue.js (npm run dev)
+    "http://localhost:5173",  # For local Vue.js (npm run dev)
     "https://boodaikg.com",
-    "https://vasyaproger-backend1-c0b9.twc1.net",  # Ваш фронтенд-домен
+    "https://vasyaproger-backend1-c0b9.twc1.net",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
@@ -76,7 +71,6 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
-
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
@@ -93,9 +87,9 @@ CORS_ALLOW_HEADERS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:3000',
-    'http://localhost:5173',  # Для локального Vue.js
+    'http://localhost:5173',  # For local Vue.js
     'https://boodaikg.com',
-    'https://vasyaproger-backend1-c0b9.twc1.net',  # Ваш фронтенд-домен
+    'https://vasyaproger-backend1-c0b9.twc1.net',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -118,20 +112,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-# Database
+# Database configuration with environment variable fallback
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
-} if DEBUG else {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ch79145_boodai',
-        'USER': 'ch79145_boodai',
-        'PASSWORD': '16162007',
-        'HOST': 'vh438.timeweb.ru',
-        'PORT': '3306',
+    } if DEBUG else {
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.getenv('DB_NAME', 'ch79145_boodai'),
+        'USER': os.getenv('DB_USER', 'ch79145_boodai'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '16162007'),
+        'HOST': os.getenv('DB_HOST', 'vh438.timeweb.ru'),
+        'PORT': os.getenv('DB_PORT', '3306'),
         'OPTIONS': {
             'charset': 'utf8mb4',
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -149,10 +141,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'ru-ru'
-TIME_ZONE = 'UTC'  # Используем UTC вместо Europe/Moscow
+TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = False  # Полностью отключаем поддержку часовых поясов
+USE_TZ = False
 
 # Static files
 STATIC_URL = '/static/'
@@ -181,7 +173,7 @@ REST_FRAMEWORK = {
 }
 
 # Email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 
 # Logging
 LOGGING = {
@@ -219,4 +211,4 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
-    X_FRAME_OPTIONS = 'DENY'  # Уже добавлено
+    X_FRAME_OPTIONS = 'DENY'
