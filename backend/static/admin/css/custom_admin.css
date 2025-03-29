@@ -1,0 +1,205 @@
+/* Кастомные стили для админки */
+body {
+    font-family: 'Inter', 'Arial', sans-serif; /* Современный шрифт */
+    background: linear-gradient(135deg, #e5e7eb, #f4f7fa); /* Мягкий градиентный фон */
+    color: #1f2937; /* Тёмно-серый для текста */
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Шапка */
+#header {
+    background: linear-gradient(45deg, #1e3a8a, #3b82f6, #60a5fa); /* Яркий градиент */
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Глубокая тень */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: slideIn 0.5s ease-out;
+}
+
+#branding h1 {
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #ffffff, #dbeafe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Заголовки модулей */
+.module h2, .module caption, .inline-group h2 {
+    background: linear-gradient(to right, #3b82f6, #93c5fd); /* Градиент для заголовков */
+    color: white;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.module h2:hover, .inline-group h2:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+}
+
+/* Таблицы */
+.change-list .results table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th, td {
+    padding: 15px;
+    transition: background 0.2s ease;
+}
+
+th {
+    background: #dbeafe;
+    color: #1e3a8a;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+tr:hover {
+    background: #eff6ff;
+    transform: scale(1.01);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+/* Кнопки */
+.button, input[type=submit], input[type=button], .submit-row input {
+    background: linear-gradient(90deg, #10b981, #34d399); /* Яркий зелёный градиент */
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: linear-gradient(90deg, #059669, #10b981);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.button:active, input[type=submit]:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Кнопка удаления */
+.submit-row input[name="_delete"] {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.submit-row input[name="_delete"]:hover {
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+}
+
+/* Поля ввода */
+input[type="text"], input[type="number"], textarea, select {
+    border: 2px solid #93c5fd;
+    border-radius: 8px;
+    padding: 10px;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    outline: none;
+}
+
+/* Фильтры */
+#changelist-filter {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#changelist-filter h2 {
+    background: linear-gradient(to right, #60a5fa, #93c5fd);
+}
+
+/* Анимации */
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.module {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Хлебные крошки */
+.breadcrumbs {
+    background: #dbeafe;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumbs a {
+    color: #1e3a8a;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.breadcrumbs a:hover {
+    color: #3b82f6;
+}
+
+/* Уведомления */
+.success, .errorlist, .warning {
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.success {
+    background: linear-gradient(to right, #d1fae5, #ecfdf5);
+    color: #065f46;
+}
+
+.errorlist, .warning {
+    background: linear-gradient(to right, #fee2e2, #fef2f2);
+    color: #991b1b;
+}

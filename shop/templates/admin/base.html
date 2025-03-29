@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrastyle %}
+  <link rel="stylesheet" href="{% static 'admin/css/output.css' %}">
+{% endblock %}
+
+{% block branding %}
+  <h1 id="site-name" class="text-3xl font-bold text-white">
+    <a href="{% url 'admin:index' %}">Tech Shop Admin</a>
+  </h1>
+{% endblock %}

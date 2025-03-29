@@ -1,0 +1,28 @@
+/* admin/css/output.css */
+.admin-row-low-stock {
+  background-color: #ffcccc !important;
+}
+
+.field-image img {
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.field-view_3d_model a {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.field-view_3d_model a:hover {
+  color: #1557b0;
+}
+
+.field-total_value, .field-total_stock {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.field-final_price {
+  color: #d32f2f;
+  font-weight: bold;
+}
