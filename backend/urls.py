@@ -1,16 +1,8 @@
-"""
-WSGI config for backend project.
-Exposes the WSGI callable as a module-level variable named ``application``.
-"""
+from django.contrib import admin
+from django.urls import path, include
 
-import os
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
-
-application = get_wsgi_application()
-
-# Для явного логгирования порта при запуске
-if os.getenv('GUNICORN_PORT_LOGGING', 'false').lower() == 'true':
-    from django.conf import settings
-    print(f"Application is running on port: {getattr(settings, 'PORT', 8000)}")
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('shop.urls')),  # Если у вас есть приложение shop
+    # Другие маршруты...
+]
