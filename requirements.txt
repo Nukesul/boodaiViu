@@ -1,8 +1,9 @@
 Django==4.2
-djangorestframework==3.14.0
-django-cors-headers==4.3.1
-django-admin-interface==0.28.5
-django-colorfield==0.11.0
-tzdata==2023.3
-pymysql==1.1.0
-gunicorn==20.1.0
+djangorestframework
+django-cors-headers
+django-admin-interface
+django-colorfield
+waitress
+tzdata
+mysqlclient
+gunicorn
