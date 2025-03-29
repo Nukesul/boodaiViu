@@ -63,14 +63,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = [
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-]
+CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
@@ -87,7 +80,7 @@ CORS_ALLOW_HEADERS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
     'http://localhost:3000',
-    'http://localhost:5173',  # For local Vue.js
+    'http://localhost:5173',
     'https://boodaikg.com',
     'https://vasyaproger-backend1-c0b9.twc1.net',
 ]
@@ -181,20 +174,11 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'console': {'class': 'logging.StreamHandler'},
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'debug.log',
-        },
+        'file': {'class': 'logging.FileHandler', 'filename': BASE_DIR / 'debug.log'},
     },
     'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-        },
-        'shop': {
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-        },
+        'django': {'handlers': ['console', 'file'], 'level': 'INFO'},
+        'shop': {'handlers': ['console', 'file'], 'level': 'DEBUG'},
     },
 }
 
@@ -212,3 +196,5 @@ if not DEBUG:
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
     X_FRAME_OPTIONS = 'DENY'
+
+# Note: The application port is handled by the WSGI server (e.g., Gunicorn) via the PORT env variable.
